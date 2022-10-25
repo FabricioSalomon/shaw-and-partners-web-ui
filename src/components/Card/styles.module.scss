@@ -3,6 +3,7 @@
   border-radius: 1rem;
   padding: 1rem;
   cursor: pointer;
+  max-width: 160px;
 }
 
 .cardTitle {
@@ -21,9 +22,15 @@
   }
 }
 
-.username {
+.usernameContainer {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.25rem;
+}
+
+.username {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

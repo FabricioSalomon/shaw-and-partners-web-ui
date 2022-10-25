@@ -13,8 +13,8 @@ export function Card({ user }: CardProps) {
       <div className={styles.avatarContainer}>
         <img src={user.avatar_url} alt="User avatar" height="70px" />
       </div>
-      <div className={styles.username}>
-        <span>User:</span> <span>{user.login}</span>
+      <div className={styles.usernameContainer}>
+        <span>User:</span> <span className={styles.username}>{user.login}</span>
       </div>
     </div>
   );

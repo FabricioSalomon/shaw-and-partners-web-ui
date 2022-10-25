@@ -49,6 +49,11 @@ button {
 
 button {
   cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+    filter: brightness(0.4);
+  }
 }
 
 a {
