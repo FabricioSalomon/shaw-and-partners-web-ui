@@ -4,11 +4,15 @@ import styles from "./styles.module.scss";
 
 type CardProps = {
   user: User;
+  handleUserDetailsModal: (user: User) => void;
 };
 
-export function Card({ user }: CardProps) {
+export function Card({ user, handleUserDetailsModal }: CardProps) {
   return (
-    <div className={styles.cardContent}>
+    <div
+      onClick={() => handleUserDetailsModal(user)}
+      className={styles.cardContent}
+    >
       <span className={styles.cardTitle}>ID: {user.id}</span>
       <div className={styles.avatarContainer}>
         <img src={user.avatar_url} alt="User avatar" height="70px" />
