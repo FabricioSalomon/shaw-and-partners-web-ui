@@ -1,15 +1,36 @@
-import { GetStaticProps } from "next";
+import { useEffect, useState } from "react";
 import { Card } from "../components/Card";
+import { Footer } from "../components/Footer";
 import { PageHead } from "../components/PageHead";
 import { User } from "../model/Users";
 import { api } from "../services/api";
 import styles from "./home.module.scss";
 
-type HomeProps = {
-  users: any;
-};
+export default function Home() {
+  const [page, setPage] = useState(0);
+  const [id, setId] = useState(0);
+  const [users, setUsers] = useState<User[]>([]);
 
-export default function Home({ users }: HomeProps) {
+  useEffect(() => {
+    if (page >= 0) {
+      api
+        .get<{ data: User[] }>(`/users?since=${id}`)
+        .then(({ data }) => {
+          setUsers(data.data);
+        })
+        .catch(() => {
+          alert("Something went wrong getting users");
+        });
+    }
+  }, [page]);
+
+  function handlePageChange(page: number) {
+    if (page >= 0) {
+      setId(page * 30);
+      setPage(page);
+    }
+  }
+
   return (
     <>
       <PageHead title="Home | Shaw and Partners - FS" />
@@ -20,18 +41,14 @@ export default function Home({ users }: HomeProps) {
             return <Card key={user.id} user={user} />;
           })}
         </div>
+        <footer className={styles.footerContainer}>
+          <Footer
+            users={users}
+            page={page}
+            onPageChange={handlePageChange}
+          />
+        </footer>
       </main>
     </>
   );
 }
-
-export const getStaticProps: GetStaticProps = async () => {
-  const { data } = await api.get("/users");
-
-  return {
-    props: {
-      users: data.data,
-    },
-    revalidate: 60 * 60 * 24, // 24 hours
-  };
-};

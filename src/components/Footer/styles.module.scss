@@ -1,0 +1,14 @@
+.footerContent {
+  display: flex;
+  gap: 5rem;
+
+  button {
+    border: 1px solid var(--white);
+    outline: none;
+    background: transparent;
+    color: var(--white);
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+  }
+}
