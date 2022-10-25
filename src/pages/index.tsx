@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 import { Card } from "../components/Card";
 import { Footer } from "../components/Footer";
-import Loading from "../components/Loading";
+import { Loading } from "../components/Loading";
 import { PageHead } from "../components/PageHead";
 import { User } from "../model/Users";
 import { api } from "../services/api";
 import styles from "./home.module.scss";
 
-export default function Home() {
+type HomeProps = {
+  handleUserDetailsModal: (user: User) => void;
+};
+
+export default function Home({ handleUserDetailsModal }: HomeProps) {
   const [page, setPage] = useState(0);
   const [id, setId] = useState(0);
   const [users, setUsers] = useState<User[]>([]);
@@ -46,7 +50,13 @@ export default function Home() {
         <h1 className={styles.title}>Github Users List</h1>
         <div className={styles.cardContainer}>
           {users.map((user: User) => {
-            return <Card key={user.id} user={user} />;
+            return (
+              <Card
+                key={user.id}
+                user={user}
+                handleUserDetailsModal={() => handleUserDetailsModal(user)}
+              />
+            );
           })}
         </div>
         <footer className={styles.footerContainer}>
