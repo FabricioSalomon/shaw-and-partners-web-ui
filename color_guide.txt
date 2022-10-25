@@ -1,0 +1,8 @@
+Blue: #61DCFB;
+Green: #04D361;
+Yellow: #EBA417;
+White: #FFFFFF;
+Title: #E1E1E6;
+Body: #A8A8B3;
+Shape: #1F2729;
+Background: #121414;
