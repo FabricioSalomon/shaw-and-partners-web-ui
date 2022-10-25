@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Card } from "../components/Card";
 import { Footer } from "../components/Footer";
+import Loading from "../components/Loading";
 import { PageHead } from "../components/PageHead";
 import { User } from "../model/Users";
 import { api } from "../services/api";
@@ -10,13 +11,16 @@ export default function Home() {
   const [page, setPage] = useState(0);
   const [id, setId] = useState(0);
   const [users, setUsers] = useState<User[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
     if (page >= 0) {
       api
         .get<{ data: User[] }>(`/users?since=${id}`)
         .then(({ data }) => {
           setUsers(data.data);
+          setIsLoading(false);
         })
         .catch(() => {
           alert("Something went wrong getting users");
@@ -31,7 +35,11 @@ export default function Home() {
     }
   }
 
-  return (
+  return isLoading ? (
+    <div className={styles.loadingContainer}>
+      <Loading />
+    </div>
+  ) : (
     <>
       <PageHead title="Home | Shaw and Partners - FS" />
       <main className={styles.homeContainer}>
@@ -42,11 +50,7 @@ export default function Home() {
           })}
         </div>
         <footer className={styles.footerContainer}>
-          <Footer
-            users={users}
-            page={page}
-            onPageChange={handlePageChange}
-          />
+          <Footer users={users} page={page} onPageChange={handlePageChange} />
         </footer>
       </main>
     </>
