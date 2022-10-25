@@ -1,0 +1,29 @@
+.cardContent {
+  background: var(--gray-700);
+  border-radius: 1rem;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.cardTitle {
+  color: var(--gray-300);
+  font-size: 0.9rem;
+}
+
+.avatarContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem;
+
+  img {
+    border-radius: 50%;
+  }
+}
+
+.username {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+}
