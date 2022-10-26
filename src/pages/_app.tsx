@@ -8,17 +8,27 @@ import "../styles/global.scss";
 function MyApp({ Component, pageProps }: AppProps) {
   const [isUserDetailsModalOpen, setUserDetailsModalOpen] = useState(false);
   const [user, setUser] = useState<User>({} as User);
+  const [menuOption, setMenuOption] = useState("home");
 
   function handleUserDetailsModal(user: User) {
     setUserDetailsModalOpen(!isUserDetailsModalOpen);
     setUser(user);
   }
+
+  function handleHeaderMenuChange(menuOption: string) {
+    setMenuOption(menuOption);
+  }
+
   return (
     <>
-      <Header />
+      <Header
+        onHeaderMenuChange={handleHeaderMenuChange}
+        menuOption={menuOption}
+      />
       <Component
         {...pageProps}
         handleUserDetailsModal={handleUserDetailsModal}
+        menuOption={menuOption}
       />
       {isUserDetailsModalOpen && (
         <UserDetailsModal
