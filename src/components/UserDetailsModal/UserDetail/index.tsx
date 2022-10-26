@@ -39,7 +39,7 @@ export function UserDetails({
           </div>
           <div>
             <span className={styles.detailTitle}>Github Profile</span>
-            <a href={userDetails.html_url} target="_blank">
+            <a href={userDetails.html_url} rel="noreferrer" target="_blank">
               {userDetails.html_url}
             </a>
           </div>
