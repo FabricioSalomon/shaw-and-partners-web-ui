@@ -35,17 +35,13 @@ export function UserRepositoriesTable({
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
 
-  function handlePageClick(event: Event) {
-    const newOffset = (event.selected * 5) % userRepositories.length;
-
-    setItemOffset(newOffset);
-  }
-
   useEffect(() => {
+    setIsLoading(true);
     api
       .get<{ data: UserRepository[] }>(`/users/${user.login}/repos`)
       .then(({ data }) => {
         setUserRepositories(data.data);
+        setIsLoading(false);
       })
       .catch(() => {
         alert("Something went wrong getting user repositories");
@@ -53,11 +49,17 @@ export function UserRepositoriesTable({
   }, [user, itemOffset]);
 
   useEffect(() => {
+    setIsLoading(true);
     const endOffset = itemOffset + 5;
     setCurrentRepositories(userRepositories.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(userRepositories.length / 5));
     setIsLoading(false);
   }, [userRepositories]);
+
+  function handlePageClick(event: Event) {
+    const newOffset = (event.selected * 5) % userRepositories.length;
+    setItemOffset(newOffset);
+  }
 
   return isLoading ? (
     <div>
@@ -86,11 +88,11 @@ export function UserRepositoriesTable({
         <ReactPaginate
           className={styles.pagination}
           breakLabel="..."
-          nextLabel="next >"
+          nextLabel=""
           onPageChange={handlePageClick}
-          pageRangeDisplayed={5}
+          pageRangeDisplayed={6}
           pageCount={pageCount}
-          previousLabel="< previous"
+          previousLabel=""
         />
       </div>
     </>

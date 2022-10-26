@@ -53,7 +53,18 @@
   list-style-type: none;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
+
+  li {
+    cursor: pointer;
+    border-radius: 0.2rem;
+    padding: 0.25rem;
+
+    &:hover {
+      filter: brightness(0.5);
+      font-weight: 500;
+      background: var(--gray-900);
+    }
+  }
 }
 
 .tableBody {
