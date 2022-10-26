@@ -1,0 +1,28 @@
+.userRepoTableBody {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+  background: var(--gray-900);
+  border-radius: 0.5rem;
+
+  span,
+  a {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0.5rem;
+  }
+
+  a {
+    transition: filter 0.2s;
+    &:hover {
+      filter: brightness(1.5);
+      background: var(--gray-900);
+      border-radius: 0.25rem;
+    }
+  }
+}
