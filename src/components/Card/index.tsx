@@ -15,7 +15,7 @@ export function Card({ user, handleUserDetailsModal }: CardProps) {
     >
       <span className={styles.cardTitle}>ID: {user.id}</span>
       <div className={styles.avatarContainer}>
-        <img src={user.avatar_url} alt="User avatar" height="70px" />
+        <img src={user.avatar_url} alt="User avatar" />
       </div>
       <div className={styles.usernameContainer}>
         <span>User:</span> <span className={styles.username}>{user.login}</span>
