@@ -40,7 +40,7 @@ export default function Home({ handleUserDetailsModal }: HomeProps) {
   }
 
   return isLoading ? (
-    <div className={styles.loadingContainer}>
+    <div>
       <Loading />
     </div>
   ) : (
